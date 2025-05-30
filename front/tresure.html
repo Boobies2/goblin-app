@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tresure</title>
+</head>
+    <header class="sidebar">
+            <nav>
+                <a href="{{ url_for('index') }}">main</a> 
+                <a href="{{ url_for('tresure') }}">сокровищница</a>
+            </nav>
+    </header>
+
+<body class="">
+    <div class="pixel-box">
+            <div class="pixel-title"></div>
+            <div class="pixel-content">
+                <div class="gif-container">
+                    <img src="{{ url_for('static', filename='img/animation2.gif') }}" alt="Анимация" class="pixel-gif">
+                    <div class="gif-controls">
+                        <button class="bios-button gif-pause">Пауза</button>
+                        <span class="gif-status">Воспроизводится</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: #000;
+            color: #00FF00;
+            margin: 0;
+            padding: 0;
+        }
+
+        .layout {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 180px;
+            background-color: #000;
+            border-right: 2px solid #00FF00;
+            padding: 20px;
+        }
+
+        .sidebar nav span {
+            display: block;
+            margin: 10px 0;
+            font-size: 14px;
+            cursor: pointer;
+        }
+            
+        .gif-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pixel-gif {
+            max-width: 100%;
+            border: 2px solid #00FF00;
+            image-rendering: pixelated;
+        }
+
+        .gif-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .gif-status {
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .gif-status.playing {
+            animation: blink 1.5s infinite steps(1);
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .pixel-gif.paused {
+            filter: grayscale(80%);
+            opacity: 0.8;
+        }
+        </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gif = document.querySelector('.pixel-gif');
+            const pauseBtn = document.querySelector('.gif-pause');
+            const statusLabel = document.querySelector('.gif-status');
+            let isPlaying = true;
+
+            function togglePlay() {
+                if (isPlaying) {
+                    gif.src = gif.src.replace('.gif', '_static.jpg');
+                    gif.classList.add('paused');
+                    statusLabel.textContent = "На паузе";
+                    statusLabel.classList.remove('playing');
+                    pauseBtn.textContent = "Играть";
+                } else {
+                    gif.src = gif.src.replace('_static.jpg', '.gif');
+                    gif.classList.remove('paused');
+                    statusLabel.textContent = "Воспроизводится";
+                    statusLabel.classList.add('playing');
+                    pauseBtn.textContent = "Пауза";
+                }
+                isPlaying = !isPlaying;
+            }
+
+            // Обработчик кнопки
+            pauseBtn.addEventListener('click', togglePlay);
+
+            // Автоматическое добавление статичного кадра при загрузке
+            gif.onload = function() {
+                if (gif.src.endsWith('.gif')) {
+                    statusLabel.classList.add('playing');
+                }
+            };
+        });
+    </script>
+</body>
+</html>

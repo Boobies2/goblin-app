@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Гоблин-интерфейс</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='js/goblin_app.js') }}" defer></script>
+</head>
+<body>
+    <div class="layout">
+        <header class="sidebar">
+            <nav>
+                <a href="{{ url_for('index') }}">main</a> 
+                <a href="{{ url_for('tresure') }}">сокровищница</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="pixel-container">
+                <!-- Блок 1: Гоблин-детектор -->
+                <div class="pixel-box">
+                    <div class="pixel-title">а ты точно гоблин?</div>
+                    <div class="pixel-content">
+                        <p>Загрузи фото или сделай снимок:</p>
+                        <div class="button-group">
+                            <label class="bios-button file-button">
+                                📁 Выбрать файл
+                                <input type="file" id="goblinInput" accept="image/*" style="display: none;">
+                            </label>
+                            <button class="bios-button" onclick="submitGoblin()">📷 Проверить</button>
+                            <button class="bios-button" id="startCameraBtn">📹 Камера</button>
+                        </div>
+                    </div>
+                    <div id="goblinResult" class="pixel-content" style="margin-top: 10px;"></div>
+                </div>
+
+                <!-- Блок 2: Причина почему да -->
+                <div class="pixel-box">
+                    <div class="book-header">
+                        <div class="book-title">Франц Кафка</div>
+                        <div class="book-subtitle">Превращение</div>
+                    </div>
+                    <div class="book-content-wrapper">
+                        <div class="book-content">
+                            <div class="book-text"></div>
+                        </div>
+                    </div>
+                    <div class="book-controls">
+                        <button class="bios-button book-prev">← Назад</button>
+                        <div class="book-status">
+                            <span class="book-page">1/52</span>
+                            <label class="auto-turn">
+                                <input type="checkbox" id="autoTurn"> 
+                            </label>
+                        </div>
+                        <button class="bios-button book-next">Вперёд →</button>
+                    </div>
+                </div>
+
+
+                <!-- Блок 3: Тест на интроверта/экстраверта -->
+                <div class="pixel-box">
+                    <div class="pixel-title">Тест личности</div>
+                    <div class="pixel-content" id="personalityTest">
+                        <p>Определите, интроверт вы или экстраверт</p>
+                        <button class="pixel-button" id="startTestBtn">Начать тест</button>
+                        <div id="testContainer"></div> <!-- Добавлен контейнер для теста -->
+                    </div>
+                </div>
+
+                <!-- Блок 4: андер конструкшен -->
+                <div class="pixel-box">
+                    <div class="pixel-title">андер конструкшен</div>
+                    <div class="pixel-content">чото не хихи не хаха</div>
+                </div>
+
+                <!-- Блок 5: Гоблины (Чат) -->
+                <div class="pixel-box large-box">
+                    <div class="pixel-title">Гоблины (Чат)</div>
+                    <div class="chat-container">
+                        <img src="{{ url_for('static', filename='img/img1.png') }}" class="chat-image" id="goblinImage" alt="Гоблин">
+                        <div class="chat-text" id="chatText"></div>
+                        <div class="model-selector">
+                            <label>
+                                <input type="radio" name="model" value="local" checked> Локальный Гоблин
+                            </label>
+                            <label>
+                                <input type="radio" name="model" value="api"> Умный Гоблин (API)
+                            </label>
+                        </div>
+                        <div class="pixel-input">
+                            <input type="text" class="pixel-text" id="userInput" placeholder="ПИШИ СЮДА..." autocomplete="off">
+                            <button class="pixel-button" onclick="startChat()">ОТПРАВИТЬ</button>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>Привет! Это я твой друг игорь! [beta(отдохну доделаю)]</p>
+    </footer>
+
+</body>
+</html>
