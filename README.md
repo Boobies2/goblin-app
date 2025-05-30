@@ -35,7 +35,7 @@ goblin_site/
 ## ⚙️ Установка
 ```bash
 # Клонируем репозиторий
-git clone https://github.com/Polynka/goblin-site.git
+git clone https://github.com/Boobies2/goblin-app/tree/main
 cd goblin-site
 
 # Ставим зависимости
